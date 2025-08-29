@@ -61,15 +61,14 @@
                 <span class="text-xl font-bold text-gray-800">Bijin Jimmy</span>
             </div>
             
-            <div class="hidden md:flex space-x-8">
+            <div id="nav-links" class="hidden md:flex space-x-8">
                 <a href="#home" class="text-black-800 hover:text-blue-600 transition-colors">Home</a>
                 <a href="#about" class="text-black-800 hover:text-blue-600 transition-colors">About</a>
                 <a href="#skills" class="text-black-800 hover:text-blue-600 transition-colors">Skills</a>
                 <a href="#projects" class="text-black-800 hover:text-blue-600 transition-colors">Projects</a>
                 <a href="#contact" class="text-black-800 hover:text-blue-600 transition-colors">Contact</a>
             </div>
-            
-            <button class="md:hidden text-gray-600">
+            <button id="mobile-menu-btn" class="md:hidden text-gray-600 focus:outline-none">
                 <i class="fas fa-bars text-2xl"></i>
             </button>
         </div>
@@ -220,13 +219,13 @@
                             Conducted a comprehensive 3-year financial analysis of Apple Inc.
                         </p>
                         <div class="flex space-x-3">
-                            <a href="#" class="text-blue-600 hover:text-blue-700 font-semibold">View Project</a>
+                            <a href="https://1drv.ms/x/c/1692e198360c0a1c/Eb9v2-40f1pLpGy0yoPc6zQBTGpAaBDeuNRowMwgMx_2kQ?e=DpHUAW" class="text-blue-600 hover:text-blue-700 font-semibold">View Project</a>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Project 2 -->
-                <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+                <!--<div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
                     <div class="relative overflow-hidden">
                         <img src="https://via.placeholder.com/300" alt="Financial modeling project" class="w-full h-48 object-cover" />
                         <div class="absolute top-4 right-4">
@@ -242,10 +241,10 @@
                             <a href="#" class="text-blue-600 hover:text-blue-700 font-semibold">View Project</a>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 
                 <!-- Project 3 -->
-                <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+                <!--<div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
                     <div class="relative overflow-hidden">
                         <img src="https://via.placeholder.com/300" alt="Business transformation project" class="w-full h-48 object-cover" />
                         <div class="absolute top-4 right-4">
@@ -261,7 +260,7 @@
                             <a href="#" class="text-blue-600 hover:text-blue-700 font-semibold">View Project</a>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
             
             <div class="text-center mt-12">
@@ -333,15 +332,15 @@
                     <form class="space-y-6">
                         <div>
                             <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name</label>
-                            <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Your Name">
+                            <input type="text" id="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Your Name">
                         </div>
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                            <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="your@email.com">
+                            <input type="email" id="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="your@email.com">
                         </div>
-                                               <div>
+                        <div>
                             <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                            <textarea id="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Type your message..."></textarea>
+                            <textarea id="message" required rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Type your message..."></textarea>
                         </div>
                         <button type="submit" class="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
                             Send Message
@@ -389,6 +388,26 @@
             }
         });
 
+        // Mobile navbar toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navLinks = document.getElementById('nav-links');
+        if (mobileMenuBtn && navLinks) {
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('hidden');
+                navLinks.classList.toggle('flex');
+                navLinks.classList.toggle('flex-col');
+                navLinks.classList.toggle('bg-white');
+                navLinks.classList.toggle('absolute');
+                navLinks.classList.toggle('top-16');
+                navLinks.classList.toggle('right-6');
+                navLinks.classList.toggle('w-48');
+                navLinks.classList.toggle('shadow-lg');
+                navLinks.classList.toggle('rounded-lg');
+                navLinks.classList.toggle('space-y-4');
+                navLinks.classList.toggle('space-x-8');
+            });
+        }
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -400,13 +419,27 @@
                         block: 'start'
                     });
                 }
+                // Hide mobile menu after click
+                if (window.innerWidth < 768 && navLinks && !navLinks.classList.contains('hidden')) {
+                    navLinks.classList.add('hidden');
+                    navLinks.classList.remove('flex', 'flex-col', 'bg-white', 'absolute', 'top-16', 'right-6', 'w-48', 'shadow-lg', 'rounded-lg', 'space-y-4');
+                    navLinks.classList.add('space-x-8');
+                }
             });
         });
 
-        // Form submission handling
+        // Form submission handling with validation
         const contactForm = document.querySelector('form');
         if (contactForm) {
             contactForm.addEventListener('submit', function(e) {
+                const name = document.getElementById('name');
+                const email = document.getElementById('email');
+                const message = document.getElementById('message');
+                if (!name.value.trim() || !email.value.trim() || !message.value.trim()) {
+                    e.preventDefault();
+                    alert('Please fill in all fields before sending your message.');
+                    return;
+                }
                 e.preventDefault();
                 alert('Thank you for your message! I\'ll get back to you soon.');
                 contactForm.reset();
